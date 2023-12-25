@@ -26,22 +26,55 @@ app.get('/api/toy/', (req, res) => {
 
 //Add Toy
 app.post('/api/toy/', (req, res) => {
-  console.log('test')
+  const { name, price, labels, createdAt, inStock } = req.body
+  const toyToSave = { name, price, labels, createdAt, inStock }
+  toyService
+    .save(toyToSave)
+    .then((toy) => res.send(toy))
+    .catch((err) => {
+      loggerService.error('Cannot save toy', err)
+      res.status(404).send('cannot save toy')
+    })
 })
 
 //Edit Toy
 app.put('/api/toy/', (req, res) => {
-  console.log('test')
+  const { _id, name, price, labels, createdAt, inStock } = req.body
+  const toyToSave = { _id, name, price, labels, createdAt, inStock }
+  toyService
+    .save(toyToSave)
+    .then((toy) => res.send(toy))
+    .catch((err) => {
+      loggerService.error('Cannot save toy', err)
+      res.status(404).send('cannot save toy')
+    })
 })
 
 //Get Toy
 app.get('/api/toy/:toyId', (req, res) => {
-  console.log('test')
+  const toyId = req.params.toyId
+  toyService
+    .getById(toyId)
+    .then((toy) => {
+      res.send(toy)
+    })
+    .catch((err) => {
+      loggerService.error('Cannot get toy', err)
+      res.status(404).send('Cannot get toy')
+    })
 })
 
 //Remove Toy
-app.delete('/api/bug/:bugId', (req, res) => {
-  console.log('test')
+app.delete('/api/toy/:toyId', (req, res) => {
+  const toyId = req.params.toyId
+  console.log(req.params)
+  toyService
+    .remove(toyId)
+    .then((toy) => res.send(toy))
+    .catch((err) => {
+      loggerService.error('cannot remove toy', err)
+      res.status(404).send('Cannot remove toy')
+    })
 })
 
 // // AUTH API

@@ -17,7 +17,7 @@ function query() {
 }
 
 function getById(toyId) {
-  const toy = toy.find((toy) => {
+  const toy = toys.find((toy) => {
     return toy._id === toyId
   })
   if (!toy) return Promise.reject('Toy does not exist')
