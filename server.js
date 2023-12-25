@@ -27,8 +27,12 @@ app.use(express.json())
 
 //Get Toys
 app.get('/api/toy/', (req, res) => {
+  //get query params to filterBy
+  const filterBy = req.query.filterBy
+  const sortBy = req.query.sortBy
+
   toyService
-    .query()
+    .query(filterBy,sortBy)
     .then((toys) => {
       res.send(toys)
     })

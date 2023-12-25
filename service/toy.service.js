@@ -5,14 +5,40 @@ export const toyService = {
   query,
   getById,
   remove,
-  save
+  save,
 }
 
 const toys = utilService.readJsonFile('data/toys.json')
 
-function query() {
-  console.log(toys)
+function query(filterBy, sortBy) {
   let toysToReturn = [...toys]
+  if (filterBy.name) {
+    const regex = new RegExp(filterBy.name, 'i')
+    toysToReturn = toys.filter((toy) => regex.test(toy.name))
+  }
+  switch (filterBy.stockStatus) {
+    case 'all':
+      break
+    case 'inStock':
+      toysToReturn = toysToReturn.filter((toy) => toy.inStock)
+      break
+    case 'notInStock':
+      toysToReturn = toysToReturn.filter((toy) => !toy.inStock)
+      break
+  }
+  switch (sortBy) {
+    case 'name':
+      toysToReturn = toysToReturn.sort((t1, t2) =>
+        t1.name.localeCompare(t2.name)
+      )
+      break
+    case 'price':
+      toysToReturn = toysToReturn.sort((t1, t2) => t1.price - t2.price)
+      break
+    case 'date':
+      toysToReturn = toysToReturn.sort((t1, t2) => t2.createdAt - t1.createdAt)
+      break
+  }
   return Promise.resolve(toysToReturn)
 }
 
