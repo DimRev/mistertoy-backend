@@ -1,12 +1,26 @@
 import path from 'path'
 import express from 'express'
 import cookieParser from 'cookie-parser'
+import cors from 'cors'
 
 import { toyService } from './service/toy.service.js'
+import { userService } from './service/user.service.js'
 import { loggerService } from './service/logger.service.js'
 
 const app = express()
 
+// Express Config:
+const corsOptions = {
+  origin: [
+    'http://127.0.0.1:8080',
+    'http://localhost:8080',
+    'http://127.0.0.1:5173',
+    'http://localhost:5173',
+  ],
+  credentials: true,
+}
+
+app.use(cors(corsOptions))
 app.use(express.static('public'))
 app.use(cookieParser())
 app.use(express.json())
@@ -67,7 +81,6 @@ app.get('/api/toy/:toyId', (req, res) => {
 //Remove Toy
 app.delete('/api/toy/:toyId', (req, res) => {
   const toyId = req.params.toyId
-  console.log(req.params)
   toyService
     .remove(toyId)
     .then((toy) => res.send(toy))
@@ -77,83 +90,66 @@ app.delete('/api/toy/:toyId', (req, res) => {
     })
 })
 
-// // AUTH API
-// app.get('/api/user', (req, res) => {
-//   userService
-//     .query()
-//     .then((users) => {
-//       res.send(users)
-//     })
-//     .catch((err) => {
-//       console.log('Cannot load users', err)
-//       res.status(400).send('Cannot load users')
-//     })
-// })
+// AUTH API
+// AUTH API
+app.get('/api/user', (req, res) => {
+  userService
+    .query()
+    .then((users) => {
+      res.send(users)
+    })
+    .catch((err) => {
+      loggerService.error('Cannot load users', err)
+      res.status(400).send('Cannot load users')
+    })
+})
 
-// app.put('/api/user', (req, res) => {
-//   console.log(req.body)
-//   const { _id, username, fullname, password, isAdmin } = req.body
-//   const userToSave = { _id, username, fullname, password, isAdmin }
-//   userService
-//     .save(userToSave)
-//     .then((user) => res.send(user))
-//     .catch((err) => {
-//       loggerService.error('Cannot save user', err)
-//       res.status(404).send('Cannot save user')
-//     })
-// })
+app.post('/api/auth/login', (req, res) => {
+  const credentials = req.body
+  console.log(credentials);
+  userService.checkLogin(credentials).then((user) => {
+    if (user) {
+      const loginToken = userService.getLoginToken(user)
+      res.cookie('loginToken', loginToken)
+      res.send(user)
+    } else {
+      loggerService.info('Invalid Credentials', credentials)
+      res.status(401).send('Invalid Credentials')
+    }
+  })
+})
 
-// app.delete('/api/user/:userId', (req, res) => {
-//   const userId = req.params.userId
-//   userService
-//     .remove(userId)
-//     .then((user) => res.send(user))
-//     .catch((err) => {
-//       loggerService.error('cannot remove user', err)
-//       res.status(404).send('Cannot remove user')
-//     })
-// })
+app.post('/api/auth/signup', (req, res) => {
+  const credentials = req.body
+  userService.save(credentials).then((user) => {
+    if (user) {
+      const loginToken = userService.getLoginToken(user)
+      res.cookie('loginToken', loginToken)
+      res.send(user)
+    } else {
+      loggerService.info('Cannot signup', credentials)
+      res.status(400).send('Cannot signup')
+    }
+  })
+})
 
-// app.post('/api/auth/login', (req, res) => {
-//   const credentials = req.body
-//   userService
-//     .checkLogin(credentials)
-//     .then((user) => {
-//       if (user) {
-//         const loginToken = userService.getLoginToken(user)
-//         res.cookie('loginToken', loginToken)
-//         res.send(user)
-//       } else {
-//         res.status(401).send('Invalid Credentials')
-//       }
-//     })
-//     .catch((err) => {
-//       res.status(401).send(err)
-//     })
-// })
+app.post('/api/auth/logout', (req, res) => {
+  res.clearCookie('loginToken')
+  res.send('logged-out!')
+})
 
-// app.post('/api/auth/signup', (req, res) => {
-//   const credentials = req.body
-//   userService
-//     .save(credentials)
-//     .then((user) => {
-//       if (user) {
-//         const loginToken = userService.getLoginToken(user)
-//         res.cookie('loginToken', loginToken)
-//         res.send(user)
-//       } else {
-//         res.status(400).send('Cannot signup')
-//       }
-//     })
-//     .catch((err) => {
-//       res.status(400).send(err)
-//     })
-// })
-
-// app.post('/api/auth/logout', (req, res) => {
-//   res.clearCookie('loginToken')
-//   res.send('logged-out!')
-// })
+app.put('/api/user', (req, res) => {
+  const loggedinUser = userService.validateToken(req.cookies.loginToken)
+  if (!loggedinUser) return res.status(400).send('No logged in user')
+  const { diff } = req.body
+  if (loggedinUser.score + diff < 0) return res.status(400).send('No credit')
+  loggedinUser.score += diff
+  return userService.save(loggedinUser).then((user) => {
+    const token = userService.getLoginToken(user)
+    res.cookie('loginToken', token)
+    res.send(user)
+  })
+})
 
 app.get('/**', (req, res) => {
   res.sendFile(path.resolve('public/index.html'))

@@ -1,10 +1,10 @@
 import fs from 'fs'
 import Cryptr from 'cryptr'
 import { utilService } from './utils.service.js'
+import { loggerService } from './logger.service.js'
 
-const cryptr = new Cryptr(process.env.DB_KEY || 'secret-puk-1234')
-
-let users = utilService.readJsonFile('data/user.json')
+const cryptr = new Cryptr(process.env.SECRET1 || 'secret-puk-1234')
+const users = utilService.readJsonFile('data/user.json')
 
 export const userService = {
   query,
@@ -23,6 +23,7 @@ function getLoginToken(user) {
 }
 
 function validateToken(token) {
+  if (!token) return null
   const str = cryptr.decrypt(token)
   const user = JSON.parse(str)
   return user
@@ -30,24 +31,36 @@ function validateToken(token) {
 
 function checkLogin({ username, password }) {
   var user = users.find((user) => user.username === username)
-  if (user && user.password === password) {
+  if (user) {
     user = {
       _id: user._id,
       fullname: user.fullname,
+      score: user.score,
       isAdmin: user.isAdmin,
     }
-    return Promise.resolve(user)
+    loggerService.info('user loggedin:', user)
   }
-  return Promise.reject('Invalid login / password')
+  return Promise.resolve(user)
 }
 
 function query() {
-  return Promise.resolve(users)
+  const res = users.map((user) => {
+    user = { ...user }
+    delete user.password
+    return user
+  })
+  return Promise.resolve(res)
 }
 
 function getById(userId) {
-  const user = users.find((user) => user._id === userId)
-  if (!user) return Promise.reject('User not found!')
+  var user = users.find((user) => user._id === userId)
+  if (user) {
+    user = {
+      _id: user._id,
+      fullname: user.fullname,
+      score: user.score,
+    }
+  }
   return Promise.resolve(user)
 }
 
@@ -56,34 +69,26 @@ function remove(userId) {
   return _saveUsersToFile()
 }
 
-function save(userToSave) {
-  let newUser
-  if (userToSave._id) {
-    const userIdx = users.findIndex(
-      (currUser) => currUser._id === userToSave._id
-    )
-    users[userIdx] = userToSave
-    newUser = userToSave
+function save(user) {
+  let userToUpdate = user
+  if (user._id) {
+    userToUpdate = users.find((_user) => user._id === _user._id)
+    userToUpdate.score = user.score
   } else {
-    //Case: No username/password/fullname
-    if (!userToSave.username || !userToSave.password || !userToSave.fullname)
-      return Promise.reject('Unable to create a user')
-    //Case: Username taken
-    if (users.some((user) => user.username === userToSave.username))
-      return Promise.reject('Username unavailable')
-
-    const { username, password, fullname } = userToSave
-    const _id = utilService.makeId()
-    newUser = { _id, username, password, fullname }
-    users.push(newUser)
+    userToUpdate._id = utilService.makeId()
+    users.push(userToUpdate)
   }
-
-  return _saveUsersToFile().then(() => newUser)
+  const miniUser = {
+    _id: userToUpdate._id,
+    fullname: userToUpdate.fullname,
+    score: userToUpdate.score,
+  }
+  return _saveUsersToFile().then(() => miniUser)
 }
 
 function _saveUsersToFile() {
   return new Promise((resolve, reject) => {
-    const usersStr = JSON.stringify(users, null, 2)
+    const usersStr = JSON.stringify(users, null, 4)
     fs.writeFile('data/user.json', usersStr, (err) => {
       if (err) {
         return console.log(err)
