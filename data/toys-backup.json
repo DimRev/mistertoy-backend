@@ -1,0 +1,42 @@
+[
+  {
+    "_id": "t101",
+    "name": "Talking Doll",
+    "price": 123,
+    "labels": ["Doll", "Battery Powered", "Baby"],
+    "createdAt": 1631031801011,
+    "inStock": true
+  },
+  {
+    "_id": "t102",
+    "name": "Building Blocks Set",
+    "price": 45,
+    "labels": ["Box game", "Art", "Baby"],
+    "createdAt": 1631032802022,
+    "inStock": true
+  },
+  {
+    "_id": "t103",
+    "name": "Remote Control Car",
+    "price": 89,
+    "labels": ["On wheels", "Battery Powered", "Baby"],
+    "createdAt": 1631033803033,
+    "inStock": false
+  },
+  {
+    "_id": "t104",
+    "name": "Puzzle Game",
+    "price": 19,
+    "labels": ["Puzzle", "Outdoor", "Baby"],
+    "createdAt": 1631034804044,
+    "inStock": true
+  },
+  {
+    "_id": "t105",
+    "name": "Plush Teddy Bear",
+    "price": 34,
+    "labels": ["Baby", "Art"],
+    "createdAt": 1631035805055,
+    "inStock": true
+  }
+]
