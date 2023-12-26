@@ -12,6 +12,11 @@ const toys = utilService.readJsonFile('data/toys.json')
 
 function query(filterBy, sortBy) {
   let toysToReturn = [...toys]
+  if (!filterBy.labels.includes('All')) {
+    toysToReturn = toysToReturn.filter((toy) => {
+      return filterBy.labels.every((label) => toy.labels.includes(label))
+    })
+  }
   if (filterBy.name) {
     const regex = new RegExp(filterBy.name, 'i')
     toysToReturn = toys.filter((toy) => regex.test(toy.name))
