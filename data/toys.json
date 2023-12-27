@@ -3,43 +3,64 @@
     "name": "Armadillo",
     "img": "toyarmadilo.png",
     "price": 37,
-    "labels": [],
+    "labels": [
+      "On wheels",
+      "Outdoor",
+      "Baby"
+    ],
     "createdAt": 1703619612495,
-    "inStock": true,
+    "inStock": false,
     "_id": "jUyjE"
   },
   {
     "name": "Letters",
     "img": "toyblast.png",
     "price": 50,
-    "labels": [],
+    "labels": [
+      "Art",
+      "Battery Powered",
+      "Puzzle"
+    ],
     "createdAt": 1703538626512,
-    "inStock": true,
+    "inStock": false,
     "_id": "1Sk17"
   },
   {
     "name": "Dinosaur",
     "img": "toydinasour.png",
     "price": 116,
-    "labels": [],
+    "labels": [
+      "Art",
+      "Battery Powered",
+      "Box game"
+    ],
     "createdAt": 1703537733863,
-    "inStock": true,
+    "inStock": false,
     "_id": "2xUKj"
   },
   {
     "name": "Drum ",
     "img": "toydrum.png",
     "price": 190,
-    "labels": [],
+    "labels": [
+      "Art",
+      "Battery Powered",
+      "Puzzle"
+    ],
     "createdAt": 1703524598276,
-    "inStock": true,
+    "inStock": false,
     "_id": "ryt3U"
   },
   {
     "name": "Nutcracker",
     "img": "toynutcracker.png",
     "price": 31,
-    "labels": [],
+    "labels": [
+      "Art",
+      "Outdoor",
+      "On wheels",
+      "Doll"
+    ],
     "createdAt": 1703524594160,
     "inStock": true,
     "_id": "hXZ2R"
@@ -48,7 +69,11 @@
     "name": "Rhino",
     "img": "toyrhino.png",
     "price": 69,
-    "labels": [],
+    "labels": [
+      "Art",
+      "Baby",
+      "Box game"
+    ],
     "createdAt": 1703524509662,
     "inStock": true,
     "_id": "a3VTW"
