@@ -44,8 +44,8 @@ app.get('/api/toy/', (req, res) => {
 
 //Add Toy
 app.post('/api/toy/', (req, res) => {
-  const { name, price, labels, createdAt, inStock } = req.body
-  const toyToSave = { name, price, labels, createdAt, inStock }
+  const { name, price, labels, createdAt, inStock, img } = req.body
+  const toyToSave = { name, price, labels, createdAt, inStock, img }
   toyService
     .save(toyToSave)
     .then((toy) => res.send(toy))
@@ -57,8 +57,8 @@ app.post('/api/toy/', (req, res) => {
 
 //Edit Toy
 app.put('/api/toy/', (req, res) => {
-  const { _id, name, price, labels, createdAt, inStock } = req.body
-  const toyToSave = { _id, name, price, labels, createdAt, inStock }
+  const { _id, name, price, labels, createdAt, inStock, img } = req.body
+  const toyToSave = { _id, name, price, labels, createdAt, inStock, img }
   toyService
     .save(toyToSave)
     .then((toy) => res.send(toy))

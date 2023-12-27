@@ -1,16 +1,15 @@
 [
   {
+    "_id": "jUyjE",
     "name": "Armadillo",
-    "img": "toyarmadilo.png",
-    "price": 37,
+    "price": "40",
     "labels": [
       "On wheels",
-      "Outdoor",
-      "Baby"
+      "Box game"
     ],
     "createdAt": 1703619612495,
-    "inStock": false,
-    "_id": "jUyjE"
+    "inStock": true,
+    "img": "toyarmadilo.png"
   },
   {
     "name": "Letters",
