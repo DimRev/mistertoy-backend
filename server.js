@@ -6,6 +6,7 @@ import cors from 'cors'
 import { toyService } from './service/toy.service.js'
 import { userService } from './service/user.service.js'
 import { loggerService } from './service/logger.service.js'
+import { dashboardService } from './service/dashboard.service.js'
 
 const app = express()
 
@@ -32,8 +33,9 @@ app.get('/api/toy/', (req, res) => {
   const sortBy = req.query.sortBy
 
   toyService
-    .query(filterBy,sortBy)
+    .query(filterBy, sortBy)
     .then((toys) => {
+      dashboardService.query()
       res.send(toys)
     })
     .catch((err) => {
@@ -110,7 +112,7 @@ app.get('/api/user', (req, res) => {
 
 app.post('/api/auth/login', (req, res) => {
   const credentials = req.body
-  console.log(credentials);
+  console.log(credentials)
   userService.checkLogin(credentials).then((user) => {
     if (user) {
       const loginToken = userService.getLoginToken(user)

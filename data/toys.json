@@ -2,13 +2,13 @@
   {
     "_id": "jUyjE",
     "name": "Armadillo",
-    "price": "40",
+    "price": "223",
     "labels": [
       "On wheels",
       "Box game"
     ],
     "createdAt": 1703619612495,
-    "inStock": true,
+    "inStock": false,
     "img": "toyarmadilo.png"
   },
   {
@@ -25,17 +25,17 @@
     "_id": "1Sk17"
   },
   {
+    "_id": "2xUKj",
     "name": "Dinosaur",
-    "img": "toydinasour.png",
-    "price": 116,
+    "price": "116",
     "labels": [
-      "Art",
       "Battery Powered",
-      "Box game"
+      "Box game",
+      "Art"
     ],
     "createdAt": 1703537733863,
     "inStock": false,
-    "_id": "2xUKj"
+    "img": "toydinasour.png"
   },
   {
     "name": "Drum ",
@@ -119,15 +119,20 @@
   {
     "_id": "t104",
     "name": "Sound",
-    "img": "toysound2.png",
     "price": 19,
     "labels": [
       "Puzzle",
       "Outdoor",
-      "Baby"
+      "Baby",
+      "On wheels",
+      "Art",
+      "Box game",
+      "Doll",
+      "Battery Powered"
     ],
     "createdAt": 1631034804044,
-    "inStock": true
+    "inStock": true,
+    "img": "toysound2.png"
   },
   {
     "_id": "t105",
