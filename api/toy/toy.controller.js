@@ -1,4 +1,5 @@
 import { loggerService } from '../../service/logger.service.js'
+import { dashboardService } from '../dashboard/dashboard.service.js'
 
 // import { toyService } from '../../service/toy.service.js' //read from /data.json
 import { toyService } from './toy.service.js'
@@ -10,6 +11,7 @@ export async function getToys(req, res) {
   try {
     loggerService.debug('Getting toys', 'filterBy:', filterBy, 'sortBy', sortBy)
     const toys = await toyService.query(filterBy, sortBy)
+    dashboardService.query()
     res.send(toys)
   } catch (err) {
     loggerService.error('Cannot get toys', err)

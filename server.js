@@ -52,6 +52,9 @@ app.use ('/api/user', userRoutes)
 import { authRoutes } from './api/auth/auth.routes.js'
 app.use('/api/auth', authRoutes)
 
+import { dashboardRoutes } from './api/dashboard/dashboard.routes.js'
+app.use('/api/dashboard', dashboardRoutes)
+
 // //Get Toys
 // app.get('/api/toy/', (req, res) => {
 //   //get query params to filterBy
@@ -153,20 +156,20 @@ app.use('/api/auth', authRoutes)
 
 //Get Dashboard Data
 
-app.get('/api/dashboard/', (req, res) => {
-  //get query params to filterBy
-  const sortBy = req.query.sortBy
+// app.get('/api/dashboard/', (req, res) => {
+//   //get query params to filterBy
+//   const sortBy = req.query.sortBy
 
-  dashboardService
-    .query()
-    .then((data) => {
-      res.send(data)
-    })
-    .catch((err) => {
-      loggerService.error('Cannot get dashboard data', err)
-      res.status(404).send('cannot get dashboard data')
-    })
-})
+//   dashboardService
+//     .query()
+//     .then((data) => {
+//       res.send(data)
+//     })
+//     .catch((err) => {
+//       loggerService.error('Cannot get dashboard data', err)
+//       res.status(404).send('cannot get dashboard data')
+//     })
+// })
 
 app.get('/**', (req, res) => {
   res.sendFile(path.resolve('public/index.html'))

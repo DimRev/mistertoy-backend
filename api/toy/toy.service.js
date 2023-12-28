@@ -15,7 +15,6 @@ export const toyService = {
 }
 
 async function query(filterBy = { name: '' }, sortBy = 'name') {
-  console.log(filterBy)
   try {
     const filterCriteria = {}
     let sortCriteria
@@ -36,16 +35,19 @@ async function query(filterBy = { name: '' }, sortBy = 'name') {
       filterCriteria.inStock = false
     }
 
-    if(sortBy==='name'){
-      sortCriteria = { name : 1}
+    if (sortBy === 'name') {
+      sortCriteria = { name: 1 }
     } else if (sortBy === 'price') {
-      sortCriteria = { price : 1}
-    } else if (sortBy === 'date'){
-      sortCriteria = { createdAt : -1}
+      sortCriteria = { price: 1 }
+    } else if (sortBy === 'date') {
+      sortCriteria = { createdAt: -1 }
     }
 
     const collection = await dbService.getCollection('toy')
-    var toys = await collection.find(filterCriteria).sort(sortCriteria).toArray()
+    var toys = await collection
+      .find(filterCriteria)
+      .sort(sortCriteria)
+      .toArray()
     return toys
   } catch (err) {
     loggerService.error('cannot find toys', err)
