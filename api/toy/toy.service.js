@@ -17,11 +17,13 @@ export const toyService = {
 async function query(filterBy = { name: '' }, sortBy = 'name') {
   try {
     const filterCriteria = {}
+
     let sortCriteria
 
     if (filterBy.name) {
       filterCriteria.name = { $regex: filterBy.name, $options: 'i' }
     }
+
 
     if (filterBy.labels.includes('All')) {
     } else if (filterBy.labels) {
