@@ -57,6 +57,19 @@ function query() {
   let totalByLabel = {}
   let labelCount = {}
 
+  _calcPricePerLabel(pricePerLabel,toys)
+  _calcInventoryByLabel(inventoryByLabel,toys)
+  _calcTotalByLabel(totalByLabel,toys)
+
+
+  console.log(pricePerLabel);
+  console.log(inventoryByLabel);
+  console.log(totalByLabel);
+
+  return Promise.resolve({pricePerLabel,inventoryByLabel,totalByLabel})
+}
+
+function _calcPricePerLabel(pricePerLabel,toys){
   for (const label of labels) {
     let count = 0
     let sum = toys.reduce((acc, toy) => {
@@ -70,5 +83,36 @@ function query() {
     console.log(`sum: ${sum}, count:${count}, avg: ${sum/count}, label: ${label}`);
     pricePerLabel[label] = Math.floor(sum/count)
   }
-  console.log(pricePerLabel);
+}
+
+function _calcInventoryByLabel(inventoryByLabel,toys){
+  for (const label of labels) {
+    let count = 0
+    let sum = toys.reduce((acc, toy) => {
+      if (toy.labels.includes(label)) {
+        let price = +toy.inventory
+        count++
+        acc = acc + price
+      }
+      return acc
+    }, 0)
+    console.log(`sum: ${sum}, count:${count}, avg: ${sum/count}, label: ${label}`);
+    inventoryByLabel[label] = Math.floor(sum)
+  }
+}
+
+function _calcTotalByLabel(totalByLabel,toys){
+  for (const label of labels) {
+    let count = 0
+    let sum = toys.reduce((acc, toy) => {
+      if (toy.labels.includes(label)) {
+        let price = +toy.stock
+        count++
+        acc = acc + price
+      }
+      return acc
+    }, 0)
+    console.log(`sum: ${sum}, count:${count}, avg: ${sum/count}, label: ${label}`);
+    totalByLabel[label] = Math.floor(sum)
+  }
 }

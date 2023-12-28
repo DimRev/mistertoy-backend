@@ -35,7 +35,6 @@ app.get('/api/toy/', (req, res) => {
   toyService
     .query(filterBy, sortBy)
     .then((toys) => {
-      dashboardService.query()
       res.send(toys)
     })
     .catch((err) => {
@@ -46,8 +45,18 @@ app.get('/api/toy/', (req, res) => {
 
 //Add Toy
 app.post('/api/toy/', (req, res) => {
-  const { name, price, labels, createdAt, inStock, img } = req.body
-  const toyToSave = { name, price, labels, createdAt, inStock, img }
+  const { name, price, labels, createdAt, inStock, img, stock, inventory } =
+    req.body
+  const toyToSave = {
+    name,
+    price,
+    labels,
+    createdAt,
+    inStock,
+    img,
+    stock,
+    inventory,
+  }
   toyService
     .save(toyToSave)
     .then((toy) => res.send(toy))
@@ -59,8 +68,28 @@ app.post('/api/toy/', (req, res) => {
 
 //Edit Toy
 app.put('/api/toy/', (req, res) => {
-  const { _id, name, price, labels, createdAt, inStock, img } = req.body
-  const toyToSave = { _id, name, price, labels, createdAt, inStock, img }
+  const {
+    _id,
+    name,
+    price,
+    labels,
+    createdAt,
+    inStock,
+    img,
+    stock,
+    inventory,
+  } = req.body
+  const toyToSave = {
+    _id,
+    name,
+    price,
+    labels,
+    createdAt,
+    inStock,
+    img,
+    stock,
+    inventory,
+  }
   toyService
     .save(toyToSave)
     .then((toy) => res.send(toy))
@@ -93,6 +122,22 @@ app.delete('/api/toy/:toyId', (req, res) => {
     .catch((err) => {
       loggerService.error('cannot remove toy', err)
       res.status(404).send('Cannot remove toy')
+    })
+})
+
+//Get Dashboard Data
+app.get('/api/dashboard/', (req, res) => {
+  //get query params to filterBy
+  const sortBy = req.query.sortBy
+
+  dashboardService
+    .query()
+    .then((data) => {
+      res.send(data)
+    })
+    .catch((err) => {
+      loggerService.error('Cannot get dashboard data', err)
+      res.status(404).send('cannot get dashboard data')
     })
 })
 

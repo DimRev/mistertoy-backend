@@ -5,15 +5,18 @@
     "price": "223",
     "labels": [
       "On wheels",
-      "Box game"
+      "Box game",
+      "Outdoor"
     ],
     "createdAt": 1703619612495,
     "inStock": false,
-    "img": "toyarmadilo.png"
+    "img": "toyarmadilo.png",
+    "stock": 100,
+    "inventory": 10
   },
   {
+    "_id": "1Sk17",
     "name": "Letters",
-    "img": "toyblast.png",
     "price": 50,
     "labels": [
       "Art",
@@ -22,7 +25,9 @@
     ],
     "createdAt": 1703538626512,
     "inStock": false,
-    "_id": "1Sk17"
+    "img": "toyblast.png",
+    "stock": 100,
+    "inventory": 70
   },
   {
     "_id": "2xUKj",
@@ -35,11 +40,13 @@
     ],
     "createdAt": 1703537733863,
     "inStock": false,
-    "img": "toydinasour.png"
+    "img": "toydinasour.png",
+    "stock": 100,
+    "inventory": 52
   },
   {
+    "_id": "ryt3U",
     "name": "Drum ",
-    "img": "toydrum.png",
     "price": 190,
     "labels": [
       "Art",
@@ -48,7 +55,9 @@
     ],
     "createdAt": 1703524598276,
     "inStock": false,
-    "_id": "ryt3U"
+    "img": "toydrum.png",
+    "stock": 100,
+    "inventory": 10
   },
   {
     "name": "Nutcracker",
@@ -62,7 +71,9 @@
     ],
     "createdAt": 1703524594160,
     "inStock": true,
-    "_id": "hXZ2R"
+    "_id": "hXZ2R",
+    "inventory": 10,
+    "stock": 100
   },
   {
     "name": "Rhino",
@@ -75,10 +86,14 @@
     ],
     "createdAt": 1703524509662,
     "inStock": true,
-    "_id": "a3VTW"
+    "_id": "a3VTW",
+    "inventory": 10,
+    "stock": 100
   },
   {
     "_id": "t101",
+    "inventory": 10,
+    "stock": 100,
     "name": "Solider",
     "img": "toysolider.png",
     "price": 123,
@@ -92,6 +107,8 @@
   },
   {
     "_id": "t102",
+    "inventory": 10,
+    "stock": 100,
     "name": "Soliders",
     "img": "toysoliders.png",
     "price": 45,
@@ -105,6 +122,8 @@
   },
   {
     "_id": "t103",
+    "inventory": 10,
+    "stock": 100,
     "name": "Sound",
     "img": "toysound.png",
     "price": 89,
@@ -118,6 +137,8 @@
   },
   {
     "_id": "t104",
+    "inventory": 10,
+    "stock": 100,
     "name": "Sound",
     "price": 19,
     "labels": [
@@ -136,6 +157,8 @@
   },
   {
     "_id": "t105",
+    "inventory": 10,
+    "stock": 100,
     "name": "Toy Story",
     "img": "toystory.png",
     "price": 34,
@@ -148,6 +171,8 @@
   },
   {
     "_id": "t106",
+    "inventory": 10,
+    "stock": 100,
     "name": "Taxi",
     "img": "toytaxi.png",
     "price": 34,
@@ -160,6 +185,8 @@
   },
   {
     "_id": "t107",
+    "inventory": 10,
+    "stock": 100,
     "name": "Teeth",
     "img": "toyteeth.png",
     "price": 34,
@@ -172,6 +199,8 @@
   },
   {
     "_id": "t108",
+    "inventory": 10,
+    "stock": 100,
     "name": "Telescope",
     "img": "toytelescope.png",
     "price": 34,
@@ -184,6 +213,8 @@
   },
   {
     "_id": "t109",
+    "inventory": 10,
+    "stock": 100,
     "name": "Train",
     "img": "toytrain.png",
     "price": 34,
@@ -196,6 +227,8 @@
   },
   {
     "_id": "t110",
+    "inventory": 10,
+    "stock": 100,
     "name": "Worm",
     "img": "toyworm.png",
     "price": 34,
