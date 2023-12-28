@@ -1,23 +1,242 @@
 [
     {
-        "_id": "u101",
-        "username": "puki",
-        "fullname": "Puki Ja",
-        "password": "secret1",
-        "isAdmin": false
+      "_id": "jUyjE",
+      "name": "Armadillo12",
+      "price": "226",
+      "labels": [
+        "On wheels",
+        "Box game",
+        "Outdoor"
+      ],
+      "createdAt": 1703619612495,
+      "inStock": false,
+      "img": "toyarmadilo.png",
+      "stock": 100,
+      "inventory": 10
     },
     {
-        "_id": "EDLlV",
-        "username": "admin",
-        "password": "admin",
-        "fullname": "admin",
-        "isAdmin": true
+      "_id": "1Sk17",
+      "name": "Letters",
+      "price": 50,
+      "labels": [
+        "Art",
+        "Battery Powered",
+        "Puzzle"
+      ],
+      "createdAt": 1703538626512,
+      "inStock": false,
+      "img": "toyblast.png",
+      "stock": 100,
+      "inventory": 70
     },
     {
-        "username": "test",
-        "password": "test",
-        "fullname": "test",
-        "score": 10000,
-        "_id": "fXJul"
+      "_id": "2xUKj",
+      "name": "Dinosaur",
+      "price": "116",
+      "labels": [
+        "Battery Powered",
+        "Box game",
+        "Art"
+      ],
+      "createdAt": 1703537733863,
+      "inStock": false,
+      "img": "toydinasour.png",
+      "stock": 100,
+      "inventory": 52
+    },
+    {
+      "_id": "ryt3U",
+      "name": "Drum ",
+      "price": 190,
+      "labels": [
+        "Art",
+        "Battery Powered",
+        "Puzzle"
+      ],
+      "createdAt": 1703524598276,
+      "inStock": false,
+      "img": "toydrum.png",
+      "stock": 100,
+      "inventory": 10
+    },
+    {
+      "name": "Nutcracker",
+      "img": "toynutcracker.png",
+      "price": 31,
+      "labels": [
+        "Art",
+        "Outdoor",
+        "On wheels",
+        "Doll"
+      ],
+      "createdAt": 1703524594160,
+      "inStock": true,
+      "_id": "hXZ2R",
+      "inventory": 10,
+      "stock": 100
+    },
+    {
+      "name": "Rhino",
+      "img": "toyrhino.png",
+      "price": 69,
+      "labels": [
+        "Art",
+        "Baby",
+        "Box game"
+      ],
+      "createdAt": 1703524509662,
+      "inStock": true,
+      "_id": "a3VTW",
+      "inventory": 10,
+      "stock": 100
+    },
+    {
+      "_id": "t101",
+      "inventory": 10,
+      "stock": 100,
+      "name": "Solider",
+      "img": "toysolider.png",
+      "price": 123,
+      "labels": [
+        "Doll",
+        "Battery Powered",
+        "Baby"
+      ],
+      "createdAt": 1631031801011,
+      "inStock": true
+    },
+    {
+      "_id": "t102",
+      "inventory": 10,
+      "stock": 100,
+      "name": "Soliders",
+      "img": "toysoliders.png",
+      "price": 45,
+      "labels": [
+        "Box game",
+        "Art",
+        "Baby"
+      ],
+      "createdAt": 1631032802022,
+      "inStock": true
+    },
+    {
+      "_id": "t103",
+      "inventory": 10,
+      "stock": 100,
+      "name": "Sound",
+      "img": "toysound.png",
+      "price": 89,
+      "labels": [
+        "On wheels",
+        "Battery Powered",
+        "Baby"
+      ],
+      "createdAt": 1631033803033,
+      "inStock": false
+    },
+    {
+      "_id": "t104",
+      "inventory": 10,
+      "stock": 100,
+      "name": "Sound",
+      "price": 19,
+      "labels": [
+        "Puzzle",
+        "Outdoor",
+        "Baby",
+        "On wheels",
+        "Art",
+        "Box game",
+        "Doll",
+        "Battery Powered"
+      ],
+      "createdAt": 1631034804044,
+      "inStock": true,
+      "img": "toysound2.png"
+    },
+    {
+      "_id": "t105",
+      "inventory": 10,
+      "stock": 100,
+      "name": "Toy Story",
+      "img": "toystory.png",
+      "price": 34,
+      "labels": [
+        "Baby",
+        "Art"
+      ],
+      "createdAt": 1631035805055,
+      "inStock": true
+    },
+    {
+      "_id": "t106",
+      "inventory": 10,
+      "stock": 100,
+      "name": "Taxi",
+      "img": "toytaxi.png",
+      "price": 34,
+      "labels": [
+        "Baby",
+        "Art"
+      ],
+      "createdAt": 1631035805055,
+      "inStock": true
+    },
+    {
+      "_id": "t107",
+      "inventory": 10,
+      "stock": 100,
+      "name": "Teeth",
+      "img": "toyteeth.png",
+      "price": 34,
+      "labels": [
+        "Baby",
+        "Art"
+      ],
+      "createdAt": 1631035805055,
+      "inStock": true
+    },
+    {
+      "_id": "t108",
+      "inventory": 10,
+      "stock": 100,
+      "name": "Telescope",
+      "img": "toytelescope.png",
+      "price": 34,
+      "labels": [
+        "Baby",
+        "Art"
+      ],
+      "createdAt": 1631035805055,
+      "inStock": true
+    },
+    {
+      "_id": "t109",
+      "inventory": 10,
+      "stock": 100,
+      "name": "Train",
+      "img": "toytrain.png",
+      "price": 34,
+      "labels": [
+        "Baby",
+        "Art"
+      ],
+      "createdAt": 1631035805055,
+      "inStock": true
+    },
+    {
+      "_id": "t110",
+      "inventory": 10,
+      "stock": 100,
+      "name": "Worm",
+      "img": "toyworm.png",
+      "price": 34,
+      "labels": [
+        "Baby",
+        "Art"
+      ],
+      "createdAt": 1631035805055,
+      "inStock": true
     }
-]
+  ]
