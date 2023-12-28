@@ -54,6 +54,7 @@ export async function updateToy(req, res) {
     inventory,
   } = req.body
   const toyToSave = {
+    _id,
     name,
     price:+price,
     labels,
