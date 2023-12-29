@@ -20,17 +20,28 @@ export async function getToys(req, res) {
 }
 
 export async function addToy(req, res) {
-  const { name, price, labels, createdAt, inStock, img, stock, inventory } =
-    req.body
-  const toyToSave = {
+  console.log('test')
+  const {
     name,
-    price:+price,
+    price,
     labels,
     createdAt,
     inStock,
     img,
-    stock:+stock,
-    inventory:+inventory,
+    stock,
+    inventory,
+    owner,
+  } = req.body
+  const toyToSave = {
+    name,
+    price: +price,
+    labels,
+    createdAt,
+    inStock,
+    img,
+    stock: +stock,
+    inventory: +inventory,
+    owner,
   }
   try {
     const toy = await toyService.add(toyToSave)
@@ -52,17 +63,19 @@ export async function updateToy(req, res) {
     img,
     stock,
     inventory,
+    owner,
   } = req.body
   const toyToSave = {
     _id,
     name,
-    price:+price,
+    price: +price,
     labels,
     createdAt,
     inStock,
     img,
-    stock:+stock,
-    inventory:+inventory,
+    stock: +stock,
+    inventory: +inventory,
+    owner,
   }
 
   try {

@@ -24,7 +24,6 @@ async function query(filterBy = { name: '' }, sortBy = 'name') {
       filterCriteria.name = { $regex: filterBy.name, $options: 'i' }
     }
 
-
     if (filterBy.labels.includes('All')) {
     } else if (filterBy.labels) {
       filterCriteria.labels = { $all: filterBy.labels }
@@ -90,17 +89,18 @@ async function add(toy) {
 }
 
 async function update(toy) {
+  const toyToSave = {
+    name: toy.name,
+    price: +toy.price,
+    labels: toy.labels,
+    createdAt: toy.createdAt,
+    inStock: toy.inStock,
+    img: toy.img,
+    stock: +toy.stock,
+    inventory: +toy.inventory,
+    owner: toy.owner,
+  }
   try {
-    const toyToSave = {
-      name:toy.name,
-      price:+toy.price,
-      labels:toy.labels,
-      createdAt:toy.createdAt,
-      inStock:toy.inStock,
-      img:toy.img,
-      stock:+toy.stock,
-      inventory:+toy.inventory,
-    }
     const collection = await dbService.getCollection('toy')
     await collection.updateOne(
       { _id: new ObjectId(toy._id) },
