@@ -14,10 +14,10 @@ export const toyService = {
   removeToyMsg,
 }
 
-async function query(filterBy = { name: '' }, sortBy = 'name') {
+async function query(filterBy = { name: '' }, sortBy = 'name', page) {
   try {
+    const ITEMS_PER_PAGE = 6
     const filterCriteria = {}
-
     let sortCriteria
 
     if (filterBy.name) {
@@ -44,12 +44,20 @@ async function query(filterBy = { name: '' }, sortBy = 'name') {
       sortCriteria = { createdAt: -1 }
     }
 
-    const collection = await dbService.getCollection('toy')
-    var toys = await collection
+    const collection = await dbService.getCollection('toy');
+    const totalItems = await collection.find(filterCriteria).count();
+
+    const skipAmount = (page - 1) * ITEMS_PER_PAGE;
+    const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
+
+    const toys = await collection
       .find(filterCriteria)
       .sort(sortCriteria)
-      .toArray()
-    return toys
+      .skip(skipAmount)
+      .limit(ITEMS_PER_PAGE)
+      .toArray();
+
+    return { toys, totalPages };
   } catch (err) {
     loggerService.error('cannot find toys', err)
     throw err
