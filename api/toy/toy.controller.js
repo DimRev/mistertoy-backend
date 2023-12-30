@@ -7,11 +7,12 @@ import { toyService } from './toy.service.js'
 export async function getToys(req, res) {
   const filterBy = req.query.filterBy
   const sortBy = req.query.sortBy
+  const owner = req.query.owner
   const page = req.query.page
-
+  console.log(page)
   try {
-    loggerService.debug('Getting toys', 'filterBy:', filterBy, 'sortBy', sortBy, page)
-    const toys = await toyService.query(filterBy, sortBy, page)
+    loggerService.debug('Getting toys', '**filterBy:**', filterBy, '**sortBy**', sortBy, '**owner**', owner ? owner : 'no owner', page)
+    const toys = await toyService.query(filterBy, sortBy, owner, page)
     dashboardService.query()
     res.send(toys)
   } catch (err) {
@@ -29,6 +30,7 @@ export async function addToy(req, res) {
     createdAt,
     inStock,
     img,
+    rating,
     stock,
     inventory,
     owner,
@@ -40,6 +42,7 @@ export async function addToy(req, res) {
     createdAt,
     inStock,
     img,
+    rating :+rating,
     stock: +stock,
     inventory: +inventory,
     owner,
@@ -62,6 +65,7 @@ export async function updateToy(req, res) {
     createdAt,
     inStock,
     img,
+    rating,
     stock,
     inventory,
     owner,
@@ -74,6 +78,7 @@ export async function updateToy(req, res) {
     createdAt,
     inStock,
     img,
+    rating: +rating,
     stock: +stock,
     inventory: +inventory,
     owner,

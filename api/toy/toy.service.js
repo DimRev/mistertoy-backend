@@ -14,11 +14,22 @@ export const toyService = {
   removeToyMsg,
 }
 
-async function query(filterBy = { name: '' }, sortBy = 'name', page) {
+async function query(
+  filterBy = { name: '' },
+  sortBy = 'name',
+  owner,
+  page = 1
+) {
+
   try {
     const ITEMS_PER_PAGE = 6
+    const skipAmount = (page - 1) * ITEMS_PER_PAGE
+
     const filterCriteria = {}
     let sortCriteria
+    if (owner) {
+      filterCriteria['owner._id'] = owner
+    }
 
     if (filterBy.name) {
       filterCriteria.name = { $regex: filterBy.name, $options: 'i' }
@@ -44,20 +55,17 @@ async function query(filterBy = { name: '' }, sortBy = 'name', page) {
       sortCriteria = { createdAt: -1 }
     }
 
-    const collection = await dbService.getCollection('toy');
-    const totalItems = await collection.find(filterCriteria).count();
-
-    const skipAmount = (page - 1) * ITEMS_PER_PAGE;
+    const collection = await dbService.getCollection('toy')
+    const totalItems = await collection.find(filterCriteria).count()
     const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
 
-    const toys = await collection
+    var toys = await collection
       .find(filterCriteria)
       .sort(sortCriteria)
       .skip(skipAmount)
       .limit(ITEMS_PER_PAGE)
-      .toArray();
-
-    return { toys, totalPages };
+      .toArray()
+    return { toys, totalPages }
   } catch (err) {
     loggerService.error('cannot find toys', err)
     throw err
@@ -104,6 +112,7 @@ async function update(toy) {
     createdAt: toy.createdAt,
     inStock: toy.inStock,
     img: toy.img,
+    rating: +toy.rating,
     stock: +toy.stock,
     inventory: +toy.inventory,
     owner: toy.owner,
