@@ -56,7 +56,7 @@ async function query(
     }
 
     const collection = await dbService.getCollection('toy')
-    const totalItems = await collection.find(filterCriteria).count()
+    const totalItems = await collection.countDocuments(filterCriteria)
     const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
 
     var toys = await collection

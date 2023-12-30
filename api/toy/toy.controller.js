@@ -11,7 +11,7 @@ export async function getToys(req, res) {
   const page = req.query.page
   console.log(page)
   try {
-    loggerService.debug('Getting toys', '**filterBy:**', filterBy, '**sortBy**', sortBy, '**owner**', owner ? owner : 'no owner', page)
+    loggerService.debug('Getting toys', '**FILTERBY:**', filterBy, '**SORTBY**', sortBy, '**OWNER**', owner ? owner : 'no owner', '**PAGE**', page)
     const toys = await toyService.query(filterBy, sortBy, owner, page)
     dashboardService.query()
     res.send(toys)
