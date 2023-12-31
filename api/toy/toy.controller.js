@@ -22,7 +22,6 @@ export async function getToys(req, res) {
 }
 
 export async function addToy(req, res) {
-  console.log('test')
   const {
     name,
     price,
@@ -112,5 +111,16 @@ export async function removeToy(req, res) {
   } catch (err) {
     loggerService.error('cannot remove toy', err)
     res.status(404).send('Cannot remove toy')
+  }
+}
+
+export async function addToyMsg(req, res) {
+  const {toyId, msg} = req.body
+  try {
+   const savedMsg = await toyService.addToyMsg(toyId, msg)
+   res.send(savedMsg)
+  } catch (err) {
+    loggerService.error('Cannot save msg', err)
+    res.status(404).send('cannot save msg')
   }
 }
