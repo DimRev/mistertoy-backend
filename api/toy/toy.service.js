@@ -137,7 +137,6 @@ async function addToyMsg(toyId, msg) {
       { _id: new ObjectId(toyId) },
       { $push: { msgs: { $each: [msg], $position: 0 } } }
     )
-    console.log(msg)
     return msg
   } catch (err) {
     loggerService.error(`cannot add toy msg ${toyId}`, err)

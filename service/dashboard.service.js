@@ -62,9 +62,6 @@ function query() {
   _calcTotalByLabel(totalByLabel,toys)
 
 
-  console.log(pricePerLabel);
-  console.log(inventoryByLabel);
-  console.log(totalByLabel);
 
   return Promise.resolve({pricePerLabel,inventoryByLabel,totalByLabel})
 }
@@ -80,7 +77,6 @@ function _calcPricePerLabel(pricePerLabel,toys){
       }
       return acc
     }, 0)
-    console.log(`sum: ${sum}, count:${count}, avg: ${sum/count}, label: ${label}`);
     pricePerLabel[label] = Math.floor(sum/count)
   }
 }
@@ -96,7 +92,6 @@ function _calcInventoryByLabel(inventoryByLabel,toys){
       }
       return acc
     }, 0)
-    console.log(`sum: ${sum}, count:${count}, avg: ${sum/count}, label: ${label}`);
     inventoryByLabel[label] = Math.floor(sum)
   }
 }
@@ -112,7 +107,6 @@ function _calcTotalByLabel(totalByLabel,toys){
       }
       return acc
     }, 0)
-    console.log(`sum: ${sum}, count:${count}, avg: ${sum/count}, label: ${label}`);
     totalByLabel[label] = Math.floor(sum)
   }
 }

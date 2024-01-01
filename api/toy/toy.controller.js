@@ -9,7 +9,6 @@ export async function getToys(req, res) {
   const sortBy = req.query.sortBy
   const owner = req.query.owner
   const page = req.query.page
-  console.log(page)
   try {
     loggerService.debug('Getting toys', '**FILTERBY:**', filterBy, '**SORTBY**', sortBy, '**OWNER**', owner ? owner : 'no owner', '**PAGE**', page)
     const toys = await toyService.query(filterBy, sortBy, owner, page)
