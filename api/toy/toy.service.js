@@ -20,7 +20,6 @@ async function query(
   owner,
   page = 1
 ) {
-
   try {
     const ITEMS_PER_PAGE = 6
     const skipAmount = (page - 1) * ITEMS_PER_PAGE
@@ -57,7 +56,7 @@ async function query(
 
     const collection = await dbService.getCollection('toy')
     const totalItems = await collection.countDocuments(filterCriteria)
-    const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
+    const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE)
 
     var toys = await collection
       .find(filterCriteria)
@@ -136,7 +135,7 @@ async function addToyMsg(toyId, msg) {
     const collection = await dbService.getCollection('toy')
     await collection.updateOne(
       { _id: new ObjectId(toyId) },
-      { $push: { msgs: msg } }
+      { $push: { msgs: { $each: [msg], $position: 0 } } }
     )
     console.log(msg)
     return msg
